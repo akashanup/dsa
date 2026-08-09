@@ -192,7 +192,7 @@ def html_to_markdown(content_html: str) -> str:
         alt_m = re.search(r'alt=[\'"](.*?)[\'"]', tag, re.I)
         src = src_m.group(1) if src_m else ""
         alt = alt_m.group(1) if alt_m else ""
-        return f"![{alt}]({src})" if src else ""
+        return f"![{alt}]({src})\n" if src else ""
 
     text = content_html
     text = re.sub(r"<pre[^>]*>(.*?)</pre>", pre_block_replacer, text, flags=re.I | re.S)
