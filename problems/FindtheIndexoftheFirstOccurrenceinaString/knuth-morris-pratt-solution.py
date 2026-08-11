@@ -45,37 +45,36 @@ When a mismatch occurs after some characters have already matched, the LPS array
 """
 
 class Solution:
-    def computeLPS(self, pat, lps):
-        l = 0
-        lps[0] = 0
-        i = 1
-
-        while i < len(pat):
-            if pat[i] == patl += 1
-                lps[i] = l
+    def computeLPS(self, pattern, lps):
+        i = 0
+        j = 1
+        while j < len(pattern):
+            if pattern[i] == pattern[j]:
                 i += 1
+                lps[j] = i
+                j += 1
             else:
-                if l > 0:
-                    l = lps[l - 1]
+                if i == 0:
+                    lps[j] = 0
+                    j += 1
                 else:
-                    lps[i] = 0
-                    i += 1
-
+                    i = lps[i-1]
+                    
+        
     def strStr(self, haystack: str, needle: str) -> int:
         lps = [0] * len(needle)
         self.computeLPS(needle, lps)
-
-        i, j = 0, 0
-
-        while i < len(haystack):
-            if haystack[i] == needlei += 1
-                j += 1
-
-            if j == len(needle):
-                return i - j
-            elif i < len(haystack) and haystack[i] != needleif j > 0:
-                    j = lps[j - 1]
+        
+        h, n = 0, 0
+        while h < len(haystack):
+            if haystack[h] == needle[n]:
+                h += 1
+                n += 1
+            if n == len(needle):
+                return h-n
+            if h < len(haystack) and haystack[h] != needle[n]:
+                if n > 0:
+                    n = lps[n-1]
                 else:
-                    i += 1
-
+                    h += 1
         return -1
